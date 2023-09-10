@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 $option = 'bxm_theme_setting';
 CSF::createOptions($option, array(
     'framework_title' => '主题设置',
-    'menu_title'      => __('主题设置', 'bxm'),
+    'menu_title'      => __('主题设置', 'bxm_lang'),
     'menu_slug'       => 'theme_settings',
     'menu_position'   => 59,
     'ajax_save'       => true,
