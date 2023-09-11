@@ -96,6 +96,7 @@ CSF::createSection(
                     '0' => __('关闭', 'bxm_lang'),
                     '1' => __('开启', 'bxm_lang'),
                     '2' => __('自动', 'bxm_lang'),
+                    '3' => __('用户自己切换', 'bxm_lang'),
                 ),
             ),
             array(

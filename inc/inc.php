@@ -27,7 +27,8 @@ function mdx_css() {
     wp_register_style('mdx_style_css', $files_root.'/style.css', '', '');
     wp_enqueue_style('mdx_mdui_css');
     wp_enqueue_style('mdx_style_css');
-    if (_PZ('theme_black') === "1" || _PZ('theme_black') === "2") {
+    $theme_black=_PZ('theme_black');
+    if ($theme_black === "1" || $theme_black === "2") {
         wp_register_style('mdx_oled', $files_root.'/css/oled.css', '', '');
         wp_enqueue_style('mdx_oled');
     }
