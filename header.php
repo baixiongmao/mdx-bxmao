@@ -54,6 +54,83 @@ $title = empty($title) ? $site_title : $title;
 $description = empty($description) ? $site_description : $description;
 // 获取当前页面的真实链接
 $canonical = !empty($canonical) ? $canonical : get_permalink();
+$body_class = is_admin_bar_showing() ? "has-admin-bar" : "";
+
+// 全局色
+$theme_color = _PZ('theme_color');
+if ($theme_color == "white") {
+    $body_class .= ' mdui-theme-primary-grey mdx-theme-white mdx-index-white';
+} else {
+    $body_class .= ' mdui-theme-primary-' . $theme_color;
+}
+// 强调色
+$theme_color_act = _PZ('theme_skin');
+$body_class .= ' mdui-theme-accent-' . $theme_color_act . ' ';
+// 首页显示方式
+$home_style = _PZ('home_style');
+if ($home_style == 'default') {
+    $home_style = '';
+}
+$body_class .= $home_style;
+// 黑色主题
+$theme_black = _PZ('theme_black');
+if ($theme_black) {
+    $body_class .= ' mdui-theme-layout-dark mdx-always-dark';
+}
+if (_PZ('md_2') && _PZ('md_2_font')) {
+    $body_class .= ' mdx-md2-font';
+}
+// 减弱动画
+if (_PZ('reduce_motion')) {
+    $body_class .= ' mdx-reduce-motion';
+}
+$home_header_type = _PZ('home_header');
+// 显示幻灯片
+if ($home_header_type == '2') {
+    // 幻灯片文章获取方式
+    $home_slide_posts_get = _PZ('home_header_slider_get');
+    // 幻灯片文章
+    $home_slide_posts = array();
+    if ($home_slide_posts_get == '1') {
+        // 获取置顶文章的 ID 数组
+        $sticky_posts = get_option('sticky_posts');
+
+        // 如果存在置顶文章
+        if (!empty($sticky_posts)) {
+            // 构建查询参数
+            $args = array(
+                'post__in' => $sticky_posts,
+                'ignore_sticky_posts' => 1, // 忽略其他非置顶文章
+            );
+            // 使用 get_posts() 函数获取文章列表
+            $sticky_query = get_posts($args);
+
+            // 遍历置顶文章列表
+            foreach ($sticky_query as $post) {
+            }
+
+            // 重置文章数据
+            wp_reset_postdata();
+        }
+    } else {
+        // 获取指定分类文章
+        $home_slide_posts = get_posts(array(
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'ignore_sticky_posts' => 1,
+            'category' => _PZ('home_header_slider_cat')
+        ));
+    }
+    // 判断文章是否为空
+    if (count($home_slide_posts) > 0) {
+        $body_class .= ' index-slide-toolbar';
+    }
+}
+// 文章列表宽度
+if (_PZ("post_list_width") === "2") {
+    $body_class .= ' mdx-wide-post-list';
+}
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -78,3 +155,6 @@ $canonical = !empty($canonical) ? $canonical : get_permalink();
     wp_head();
     ?>
 </head>
+
+
+<body class="<?php echo $body_class ?>">

@@ -142,6 +142,7 @@ CSF::createSection(
         ),
     ),
 );
+// 首页
 CSF::createSection(
     $option,
     array(
@@ -156,9 +157,9 @@ CSF::createSection(
                 'title'     => __('首页样式', 'io_setting'),
                 'options'   => array(
                     'default' => get_theme_file_uri('/images/svg/default-home.svg'),
-                    'concise'    => get_theme_file_uri('/images/svg/concise-home.svg'),
-                    'duolayout'    => get_theme_file_uri('/images/svg/duolayout-home.svg'),
-                    'naive'    => get_theme_file_uri('/images/svg/naive-home.svg'),
+                    'mdx-first-simple'    => get_theme_file_uri('/images/svg/concise-home.svg'),
+                    'mdx-first-tworows'    => get_theme_file_uri('/images/svg/duolayout-home.svg'),
+                    'mdx-index-void'    => get_theme_file_uri('/images/svg/naive-home.svg'),
                 ),
                 'default'   => 'default',
             ),
@@ -176,8 +177,8 @@ CSF::createSection(
             array(
                 'id' => 'home_img_ur',
                 'type' => 'media',
-                'title' => __('默认特色图片地址', 'bxm_lang'),
-                'after' => __('上传默认特色图片', 'bxm_lang'),
+                'title' => __('背景图片', 'bxm_lang'),
+                'after' => __('上传背景图片', 'bxm_lang'),
                 'dependency' => array('home_img', '==', '1'),
                 'default'   => array(
                     'url'       => get_theme_file_uri('/images/dpic.jpg'),
@@ -246,13 +247,13 @@ CSF::createSection(
                 'id' => 'home_header_slider_cat',
                 'title' => __('幻灯片文章分类id', 'bxm_lang'),
                 'after' => __('在此设定首页幻灯片文章的分类名。当分类不存在时,将显示最新文章,多个分类id用英文逗号隔开', 'bxm_lang'),
-                'type' => 'number',
+                'type' => 'text',
                 'dependency' => array('home_header', '==', '2'),
             )
         ),
     ),
 );
-
+// 文章
 CSF::createSection(
     $option,
     array(
@@ -264,7 +265,7 @@ CSF::createSection(
             array(
                 'id'        => 'post_style',
                 'type'      => 'image_select',
-                'title'     => __('首页样式', 'io_setting'),
+                'title'     => __('首页样式', 'bxm_lang'),
                 'options'   => array(
                     'default' => get_theme_file_uri('/images/svg/defaule-post.svg'),
                     'concise'    => get_theme_file_uri('/images/svg/concise-post.svg'),
@@ -272,6 +273,16 @@ CSF::createSection(
                     'naive'    => get_theme_file_uri('/images/svg/naive-post.svg'),
                 ),
                 'default'   => 'default',
+            ),
+            array(
+                'title'=>__('文章默认特色图片','bxm_lang'),
+                'id'=>'post_default_thumbnail',
+                'type'=>'media',
+                'after'=>__('上传默认特色图片','bxm_lang'),
+                'default'   => array(
+                    'url'       => get_theme_file_uri('/images/dpic.jpg'),
+                    'thumbnail' => get_theme_file_uri('/images/dpic.jpg'),
+                ),
             ),
             array(
                 'title' => __('文章时间显示位置', 'bxm_lang'),
