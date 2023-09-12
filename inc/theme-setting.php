@@ -156,9 +156,13 @@ CSF::createSection(
                 'type'      => 'image_select',
                 'title'     => __('首页样式', 'io_setting'),
                 'options'   => array(
+                    // 默认
                     'default' => get_theme_file_uri('/images/svg/default-home.svg'),
+                    // 简单
                     'mdx-first-simple'    => get_theme_file_uri('/images/svg/concise-home.svg'),
+                    // 两栏
                     'mdx-first-tworows'    => get_theme_file_uri('/images/svg/duolayout-home.svg'),
+                    // 朴素
                     'mdx-index-void'    => get_theme_file_uri('/images/svg/naive-home.svg'),
                 ),
                 'default'   => 'default',
