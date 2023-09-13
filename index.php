@@ -21,7 +21,7 @@ if ($home_style != 'mdx-first-simple') {
     if ($home_header == '1') {
         $class .= ' lazyload';
     }
-    // echo '<div class="' . $class . '" data-bg="' . $img . '"></div>';
+    echo '<div class="' . $class . '" data-bg="' . $img . '"></div>';
 }
 if (_PZ('home_img_text_color')) {
     echo '<div class="mdx-index-img-bg mdui-color-theme"></div>';
