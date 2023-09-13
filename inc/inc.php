@@ -101,3 +101,14 @@ function mdx_js()
     wp_enqueue_script('mdx_sl_js');
 }
 add_action('wp_enqueue_scripts', 'mdx_js');
+//页面浏览量
+function get_post_views($post_id) {
+    $count_key = 'views';
+    $count = get_post_meta($post_id, $count_key, true);
+    if ($count == '') {
+        delete_post_meta($post_id, $count_key);
+        add_post_meta($post_id, $count_key, '0');
+        $count = '0';
+    }
+    return $count;
+}

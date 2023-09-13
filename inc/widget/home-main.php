@@ -29,6 +29,5 @@ if ($home_style != "mdx-first-simple") {
     <!-- 首页文章标题 STAR -->
     <h3 class="mdx-all-posts">这是文章标题</h3>
     <!-- 首页文章标题 END-->
-    <?php include('posts-main.php')?>
+    <?php get_template_part('inc/widget/posts-main')?>
     
-</div>

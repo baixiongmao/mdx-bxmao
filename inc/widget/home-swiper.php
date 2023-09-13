@@ -41,7 +41,7 @@ $home_header_slider_style = _PZ('home_header_slider_style');
             // 首页幻灯片样式
 
             // 遍历文章列表
-            while ($query->have_posts()) {
+            while ($query->have_posts()) :
                 $query->the_post();
                 switch ($home_header_slider_style) {
                     case '1':
@@ -54,7 +54,7 @@ $home_header_slider_style = _PZ('home_header_slider_style');
                         include('swiper-style/swiper-3.php');
                         break;
                 }
-            }
+            endwhile;
             // // 重置文章数据
             // wp_reset_postdata();
         } ?>
