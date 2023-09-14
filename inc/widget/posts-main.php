@@ -36,4 +36,4 @@
     ?>
 
 </main>
-<div class="nextpage mdui-center"><?php next_posts_link(__('加载更多', 'mdx')); ?> </div>
+<div class="nextpage mdui-center"><?php next_posts_link(__('加载更多', 'bxm_lang')); ?> </div>

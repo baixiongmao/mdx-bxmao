@@ -74,7 +74,7 @@ if ($home_style == 'default') {
 $body_class .= $home_style;
 // 黑色主题
 $theme_black = _PZ('theme_black');
-if ($theme_black) {
+if ($theme_black=='1') {
     $body_class .= ' mdui-theme-layout-dark mdx-always-dark';
 }
 if (_PZ('md_2') && _PZ('md_2_font')) {

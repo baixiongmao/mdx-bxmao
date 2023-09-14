@@ -34,7 +34,7 @@ function mdx_css()
         wp_enqueue_style('mdx-oled');
     }
     if ($theme_black == '3') {
-        wp_register_script('auto-theme-dark', get_template_directory_uri() . '/js/auto_theme_dark.js', array(), '', false); // true 表示放在页脚
+        wp_register_script('auto-theme-dark', get_template_directory_uri() . '/js/auto_theme_dark.min.js', array(), '', false); // true 表示放在页脚
 
         // 将脚本添加到 WordPress 页面中
         wp_enqueue_script('auto-theme-dark');
@@ -112,3 +112,14 @@ function get_post_views($post_id) {
     }
     return $count;
 }
+register_sidebar(
+    array(
+        'name' => __('右侧菜单', 'mdx'),
+        'id' => 'widget_right',
+        'description' => __('在每个页面的右侧，默认隐藏，可以通过滑动或按钮调出。', 'mdx'),
+        'before_widget' => '<div class="mdui-card mdx-widget %2$s">',
+        'after_widget' => '</div></div>',
+        'before_title' => '<div class="mdui-card-primary"><div class="mdui-card-primary-title">',
+        'after_title' => '</div></div><div class="mdui-card-content mdui-typo">'
+    )
+);

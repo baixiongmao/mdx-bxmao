@@ -237,6 +237,13 @@ CSF::createSection(
                 ),
             ),
             array(
+                'title'=>__('幻灯片切换时间','bxm_lang'),
+                'id'=>'home_header_slider_time',
+                'type'=>'number',
+                'default'=>5,
+                'dependency' => array('home_header', '==', '2'),
+            ),
+            array(
                 'id' => 'home_header_slider_get',
                 'title' => __('幻灯片文章获取方式', 'bxm_lang'),
                 'type' => 'button_set',
@@ -262,17 +269,17 @@ CSF::createSection(
                 'after' => __('是否显示推荐文章。', 'bxm_lang'),
             ),
             array(
-                'title'=>__('推荐文章数量', 'bxm_lang'),
-                'id'=>'home_recommend_num',
-                'type'=>'number',
-                'default'=>3,
+                'title' => __('推荐文章数量', 'bxm_lang'),
+                'id' => 'home_recommend_num',
+                'type' => 'number',
+                'default' => 3,
                 'dependency' => array('home_recommend', '==', 'true'),
             ),
             array(
-                'title'=>__('推荐文章分类', 'bxm_lang'),
-                'id'=>'home_recommend_cat',
-                'type'=>'text',
-                'default'=>'',
+                'title' => __('推荐文章分类', 'bxm_lang'),
+                'id' => 'home_recommend_cat',
+                'type' => 'text',
+                'default' => '',
             ),
         ),
     ),
@@ -397,21 +404,21 @@ CSF::createSection(
                 ),
             ),
             array(
-                'title'=>__('文章列表底部显示内容', 'bxm_lang'),
-                'id'=>'post_list_footer_show',
+                'title' => __('文章列表底部显示内容', 'bxm_lang'),
+                'id' => 'post_list_footer_show',
                 // 多选框
-                'type'=>'checkbox',
-                'options'=>array(
-                    'views'=>__('浏览量', 'bxm_lang'),
+                'type' => 'checkbox',
+                'options' => array(
+                    'views' => __('浏览量', 'bxm_lang'),
                     // 发表时间
-                    'time'=>__('发表时间', 'bxm_lang'),
+                    'time' => __('发表时间', 'bxm_lang'),
                     // 评论数
-                    'comment'=>__('评论数', 'bxm_lang'),
+                    'comment' => __('评论数', 'bxm_lang'),
                 ),
-                'default'=>array(
-                    'views'=>true,
-                    'time'=>true,
-                    'comment'=>true,
+                'default' => array(
+                    'views' => true,
+                    'time' => true,
+                    'comment' => true,
                 ),
             ),
         ),
@@ -455,15 +462,10 @@ CSF::createSection(
                 'type' => 'text',
                 'dependency' => array('header_show', '==', '3'),
             ),
-            array(
-                'title' => __('点击标题栏返回顶部', 'bxm_lang'),
-                'id' => 'header_back_top',
-                'type' => 'switcher',
-                'default' => false,
-            )
         ),
     ),
 );
+// 抽屉设置
 CSF::createSection(
     $option,
     array(
@@ -504,6 +506,7 @@ CSF::createSection(
         ),
     ),
 );
+// 页脚设置
 CSF::createSection(
     $option,
     array(
@@ -530,9 +533,16 @@ CSF::createSection(
                 'after' => __('支持HTML标签', 'bxm_lang'),
                 'default' => '<p>本站由 <a href="https://www.bxmao.net" target="_blank">白熊猫</a> 强力驱动</p>',
             ),
+            array(
+                'title'=>__('“阅读更多”文本自定义', 'bxm_lang'),
+                'id'=>'read_more_text',
+                'type'=>'text',
+                'default'=>'阅读更多',
+            ),
         ),
     ),
 );
+// 其他选项
 CSF::createSection(
     $option,
     array(
@@ -579,6 +589,49 @@ CSF::createSection(
                 'default' => false,
                 'after' => __('开启后，标签云将会使用多彩样式。', 'bxm_lang'),
             ),
+            array(
+                'title' => __('开启右侧小工具栏', 'bxm_lang'),
+                'id' => 'right_sidebar',
+                'type' => 'switcher',
+                'default' => false,
+            ),
+            array(
+                'title'=>__('开启实时搜索', 'bxm_lang'),
+                'id'=>'search_live',
+                'type'=>'switcher',
+                'default'=>false,
+            ),
+            array(
+                'title' => __('显示cookie同意按钮', 'bxm_lang'),
+                'id' => 'cookie_agree',
+                'type' => 'switcher',
+                'default' => false,
+            ),
+            array(
+                'title' => __('cookie同意按钮文字', 'bxm_lang'),
+                'id' => 'cookie_agree_text',
+                'type' => 'textarea',
+                'default' => '我同意',
+                'dependency' => array('cookie_agree', '==', 'true'),
+            ),
+            array(
+                'title'=>__('评论无限加载', 'bxm_lang'),
+                'id'=>'comment_infinite',
+                'type'=>'switcher',
+                'default'=>false,
+            ),
+            array(
+                'title'=>__('点击标题栏返回顶部', 'bxm_lang'),
+                'id'=>'header_back_top',
+                'type'=>'switcher',
+                'default'=>false,
+            ),
+            array(
+                'title'=>__('增强的文章列表加载方式', 'bxm_lang'),
+                'id'=>'post_list_ajax',
+                'type'=>'switcher',
+                'default'=>false,
+            ),
         ),
     ),
 );
@@ -587,6 +640,7 @@ CSF::createSection($option, array(
     'id' => 'bxm-theme-functions',
     'icon'  => 'fa fa-cogs',
 ));
+// 文章页面
 CSF::createSection(
     $option,
     array(
@@ -655,19 +709,6 @@ CSF::createSection(
                 'id' => 'post_author_info',
                 'type' => 'switcher',
                 'default' => false,
-            ),
-            array(
-                'title'=>__('显示cookie同意按钮', 'bxm_lang'),
-                'id'=>'cookie_agree',
-                'type'=>'switcher',
-                'default'=>false,
-            ),
-            array(
-                'title'=>__('cookie同意按钮文字', 'bxm_lang'),
-                'id'=>'cookie_agree_text',
-                'type'=>'textarea',
-                'default'=>'我同意',
-                'dependency' => array('cookie_agree', '==', 'true'),
             ),
         ),
     ),
