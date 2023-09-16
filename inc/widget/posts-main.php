@@ -27,7 +27,6 @@
         while ($query->have_posts()) :
             $query->the_post();
             get_template_part('template-parts/content-' . $post_list_style, get_post_format());
-
     ?>
     <?php
         endwhile;

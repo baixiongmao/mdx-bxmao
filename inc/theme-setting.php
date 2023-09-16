@@ -237,10 +237,10 @@ CSF::createSection(
                 ),
             ),
             array(
-                'title'=>__('幻灯片切换时间','bxm_lang'),
-                'id'=>'home_header_slider_time',
-                'type'=>'number',
-                'default'=>5,
+                'title' => __('幻灯片切换时间', 'bxm_lang'),
+                'id' => 'home_header_slider_time',
+                'type' => 'number',
+                'default' => 5,
                 'dependency' => array('home_header', '==', '2'),
             ),
             array(
@@ -534,10 +534,10 @@ CSF::createSection(
                 'default' => '<p>本站由 <a href="https://www.bxmao.net" target="_blank">白熊猫</a> 强力驱动</p>',
             ),
             array(
-                'title'=>__('“阅读更多”文本自定义', 'bxm_lang'),
-                'id'=>'read_more_text',
-                'type'=>'text',
-                'default'=>'阅读更多',
+                'title' => __('“阅读更多”文本自定义', 'bxm_lang'),
+                'id' => 'read_more_text',
+                'type' => 'text',
+                'default' => '阅读更多',
             ),
         ),
     ),
@@ -596,10 +596,10 @@ CSF::createSection(
                 'default' => false,
             ),
             array(
-                'title'=>__('开启实时搜索', 'bxm_lang'),
-                'id'=>'search_live',
-                'type'=>'switcher',
-                'default'=>false,
+                'title' => __('开启实时搜索', 'bxm_lang'),
+                'id' => 'search_live',
+                'type' => 'switcher',
+                'default' => false,
             ),
             array(
                 'title' => __('显示cookie同意按钮', 'bxm_lang'),
@@ -615,31 +615,54 @@ CSF::createSection(
                 'dependency' => array('cookie_agree', '==', 'true'),
             ),
             array(
-                'title'=>__('评论无限加载', 'bxm_lang'),
-                'id'=>'comment_infinite',
-                'type'=>'switcher',
-                'default'=>false,
+                'title' => __('评论无限加载', 'bxm_lang'),
+                'id' => 'comment_infinite',
+                'type' => 'switcher',
+                'default' => false,
             ),
             array(
-                'title'=>__('点击标题栏返回顶部', 'bxm_lang'),
-                'id'=>'header_back_top',
-                'type'=>'switcher',
-                'default'=>false,
+                'title' => __('点击标题栏返回顶部', 'bxm_lang'),
+                'id' => 'header_back_top',
+                'type' => 'switcher',
+                'default' => false,
             ),
             array(
-                'title'=>__('增强的文章列表加载方式', 'bxm_lang'),
-                'id'=>'post_list_ajax',
-                'type'=>'switcher',
-                'default'=>false,
+                'title' => __('增强的文章列表加载方式', 'bxm_lang'),
+                'id' => 'post_list_ajax',
+                'type' => 'switcher',
+                'default' => false,
             ),
         ),
     ),
 );
+// 功能区
 CSF::createSection($option, array(
     'title' => __('功能', 'io_setting'),
     'id' => 'bxm-theme-functions',
     'icon'  => 'fa fa-cogs',
 ));
+// 列表页
+CSF::createSection(
+    $option,
+    array(
+        'title' => __('文章列表', 'bxm_lang'),
+        'parent'      => 'bxm-theme-functions',
+        'icon' => 'fa fa-list',
+        'description' => __('文章列表设置', 'bxm_lang'),
+        'fields'=>array(
+            array(
+                'title'=>__('文章列表链接可点击区域', 'bxm_lang'),
+                'id'=>'post_list_clickable',
+                'type'=>'button_set',
+                'default'=>'1',
+                'options'=>array(
+                    '1'=>__('标题', 'bxm_lang'),
+                    '2'=>__('缩略图和标题', 'bxm_lang'),
+                ),
+            ),
+        ),
+    ),
+);
 // 文章页面
 CSF::createSection(
     $option,

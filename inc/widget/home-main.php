@@ -24,7 +24,7 @@ if ($home_style != "mdx-first-simple") {
     </div>
     <!-- 公告 END -->
     <!-- 推荐文章 STAR -->
-    <?php include('recommend-post.php') ?>
+    <?php get_template_part('inc/widget/recommend-post') ?>
     <!-- 推荐文章 END -->
     <!-- 首页文章标题 STAR -->
     <h3 class="mdx-all-posts">这是文章标题</h3>

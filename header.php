@@ -87,45 +87,7 @@ if (_PZ('reduce_motion')) {
 $home_header_type = _PZ('home_header');
 // 显示幻灯片
 if ($home_header_type == '2') {
-    // 幻灯片文章获取方式
-    $home_slide_posts_get = _PZ('home_header_slider_get');
-    // 幻灯片文章
-    $home_slide_posts = array();
-    if ($home_slide_posts_get == '1') {
-        // 获取置顶文章的 ID 数组
-        $sticky_posts = get_option('sticky_posts');
-
-        // 如果存在置顶文章
-        if (!empty($sticky_posts)) {
-            // 构建查询参数
-            $args = array(
-                'post__in' => $sticky_posts,
-                'ignore_sticky_posts' => 1, // 忽略其他非置顶文章
-            );
-            // 使用 get_posts() 函数获取文章列表
-            $sticky_query = get_posts($args);
-
-            // 遍历置顶文章列表
-            foreach ($sticky_query as $post) {
-            }
-
-            // 重置文章数据
-            wp_reset_postdata();
-        }
-    } else {
-        // 获取指定分类文章
-        $home_slide_posts = get_posts(array(
-            'post_type' => 'post',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-            'ignore_sticky_posts' => 1,
-            'category' => _PZ('home_header_slider_cat')
-        ));
-    }
-    // 判断文章是否为空
-    if (count($home_slide_posts) > 0) {
-        $body_class .= ' index-slide-toolbar';
-    }
+    $body_class .= ' index-slide-toolbar';
 }
 // 文章列表宽度
 if (_PZ("post_list_width") === "2") {

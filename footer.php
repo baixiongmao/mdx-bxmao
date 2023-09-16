@@ -107,6 +107,9 @@ if (_PZ('search_live')) { ?>
         mdx_tapToTop = 1;
     <?php } ?>
 </script>
+<script>
+    var enhanced_ajax=false;
+</script>
 <?php if (is_home()&&_PZ('home_header')=='2') { ?>
     <script>
         var enhanced_ajax = <?php echo json_encode((bool)_PZ('post_list_ajax'))?>;
