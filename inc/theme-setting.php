@@ -113,6 +113,7 @@ CSF::createSection(
                 'title' => __('Material Design 2 字体', 'bxm_lang'),
                 'after' => __('开启后，部分标题文字将会使用 Material Design 2 风格字体显示。请注意该字体仅包含拉丁字符。', 'bxm_lang'),
                 'default' => false,
+                'dependency' => array('md_2', '==', 'true'),
             ),
             array(
                 'id' => 'chrome_color',
@@ -324,6 +325,7 @@ CSF::createSection(
                     '2' => __('文章底部', 'bxm_lang'),
                     '3' => __('不显示', 'bxm_lang'),
                 ),
+                'default'=>'1',
             ),
             array(
                 'title' => __('文章导航栏配色方案', 'bxm_lang'),
@@ -632,6 +634,12 @@ CSF::createSection(
                 'type' => 'switcher',
                 'default' => false,
             ),
+            array(
+                'title'=>__('减弱动画模式', 'bxm_lang'),
+                'id'=>'reduce_motion',
+                'type'=>'switcher',
+                'default'=>false,
+            )
         ),
     ),
 );
@@ -732,6 +740,12 @@ CSF::createSection(
                 'id' => 'post_author_info',
                 'type' => 'switcher',
                 'default' => false,
+            ),
+            array(
+                'title'=>__('文章页脚推荐文章','bxm_lang'),
+                'id'=>'post_footer_recommend',
+                'type'=>'switcher',
+                'default'=>false,
             ),
         ),
     ),

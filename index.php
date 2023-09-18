@@ -1,5 +1,7 @@
 <?php flush(); ?>
 <?php get_header();
+$class='body-grey1 mdx-md2-font mdx-reduce-motion  ';
+$class=' mdx-wide-post-list ';
 $img = _PZ('home_img_ur')['url'];
 ?>
 <div class="fullScreen sea-close"></div>

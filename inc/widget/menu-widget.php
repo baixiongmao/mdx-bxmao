@@ -56,7 +56,9 @@ $theme_black = _PZ('theme_black');
     } else {
     ?>
         <div class="mdx-side-title">
-            <a href="<?php bloginfo('url');?>"><span><?php
+            <a href="<?php bloginfo('url'); ?>">
+                <span>
+                    <?php
                     $header_show_type = _PZ('header_show');
                     switch ($header_show_type) {
                         case '1':
@@ -88,6 +90,15 @@ $theme_black = _PZ('theme_black');
     <?php } ?>
     <nav role="navigation">
         <?php
-        wp_nav_menu(array('theme_location' => 'mdx_menu', 'menu' => 'mdx_menu', 'depth' => 2, 'container' => false, 'menu_class' => 'mdui-list', 'menu_id' => 'mdx_menu'));
+        wp_nav_menu(
+            array(
+                'theme_location' => 'sidebar_menu',
+                'menu' => 'mdx_menu',
+                'depth' => 2,
+                'container' => false,
+                'menu_class' => 'mdui-list',
+                'menu_id' => 'mdx_menu',
+            ),
+        );
         ?></nav>
 </div>
