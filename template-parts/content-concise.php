@@ -28,7 +28,7 @@ if (empty($imgurl)) {
 if (empty($imgurl)) { ?>
     <div class="mdui-card postDiv mdui-center mdui-hoverable post-item">
         <div class="mdui-card-actions">
-            <a href="<?php the_permalink(); ?>" class="mdui-text-color-theme ainList">
+            <a href="<?php echo the_permalink(); ?>" class="mdui-text-color-theme ainList">
                 <h1><?php the_title(); ?></h1>
             </a>
             <!-- 判断是否显示文章摘要 -->
@@ -72,36 +72,34 @@ if (empty($imgurl)) { ?>
             <?php
             // 可点击区域获取
             $clickable_area = _PZ('post_list_clickable');
-            if ($clickable_area == '1') : echo '<a href="' . the_permalink() . '">';
-            endif;
+            if ($clickable_area == '1') {
+            ?>
+                <a href="<?php the_permalink() ?>">
+                <?php
+            }
             // 文章列表图片高度
             $post_list_img_height = _PZ('post_list_img_height');
             if ($post_list_img_height == '1') { ?>
-                <img src="data:image/gif;base64,R0lGODlhAgABAIAAALGxsQAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==" data-src="<?php echo $imgurl ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" class="LazyLoadList mdui-color-theme mdui-text-color-theme lazyload">
-            <?php } else { ?>
-                <div class="post_list_t_img lazyload mdui-color-theme" data-bg="<?php echo $imgurl ?>" title="<?php the_title(); ?>"></div>
-            <?php } ?>
-            <div class="mdui-card-media-covered ct1">
-                <div class="mdui-card-primary">
-                    <?php if ($clickable_area === '2') : echo '<a href="' . the_permalink() . '">';
-                    endif; ?>
-                    <div class="mdui-card-primary-title"><?php the_title(); ?></div>
-                    <?php if ($clickable_area === '2') : echo '</a>'; ?><?php endif; ?>
-                    <?php if ($clickable_area === '2') { ?>
-                        <a href="<?php the_permalink(); ?>">
-                        <?php } ?><div class="mdui-card-primary-title"><?php the_title(); ?></div>
-                        <?php if ($clickable_area === '2') { ?>
-                        </a>
-                    <?php } ?>
-                    <?php if ($show_excerpt) { ?>
-                        <div class="mdui-card-primary-subtitle">
-                            <?php echo $excerpt ?>
-                        </div>
-                    <?php } ?>
+                    <img src="data:image/gif;base64,R0lGODlhAgABAIAAALGxsQAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==" data-src="<?php echo $imgurl ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" class="LazyLoadList mdui-color-theme mdui-text-color-theme lazyload">
+                <?php } else { ?>
+                    <div class="post_list_t_img lazyload mdui-color-theme" data-bg="<?php echo $imgurl ?>" title="<?php the_title(); ?>"></div>
+                <?php } ?>
+                <div class="mdui-card-media-covered ct1">
+                    <div class="mdui-card-primary">
+                        <?php if ($clickable_area === '2') : echo '<a href="' . the_permalink() . '">';
+                        endif; ?>
+                        <div class="mdui-card-primary-title"><?php the_title(); ?></div>
+                        <?php if ($clickable_area === '2') : echo '</a>'; ?><?php endif; ?>
+                        
+                        <?php if ($show_excerpt) { ?>
+                            <div class="mdui-card-primary-subtitle">
+                                <?php echo $excerpt ?>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
-            <?php if ($clickable_area === '2') : echo '</a>';
-            endif; ?>
+                <?php if ($clickable_area === '1') : echo '</a>';
+                endif; ?>
         </div>
     </div>
 <?php } ?>

@@ -96,7 +96,8 @@ function mdx_js()
 }
 add_action('wp_enqueue_scripts', 'mdx_js');
 //页面浏览量
-function get_post_views($post_id) {
+function get_post_views($post_id)
+{
     $count_key = 'views';
     $count = get_post_meta($post_id, $count_key, true);
     if ($count == '') {
@@ -118,7 +119,8 @@ register_sidebar(
     )
 );
 //面包屑
-function bxm_breadcrumb() {
+function bxm_breadcrumb()
+{
     $delimiter = '&nbsp;&nbsp;<span class="mdx-spr">•</span>&nbsp;&nbsp;'; // 分隔符
     $before = '<span class="current">'; // 在当前链接前插入
     $after = '</span>'; // 在当前链接后插入
@@ -126,7 +128,7 @@ function bxm_breadcrumb() {
         echo '<div itemscope itemtype="https://schema.org/WebPage" id="crumbs">';
         global $post;
         $homeLink = home_url();
-        echo ' <a itemprop="breadcrumb" href="'.$homeLink.'">'.__('首页', 'mdx').'</a> '.$delimiter.' ';
+        echo ' <a itemprop="breadcrumb" href="' . $homeLink . '">' . __('首页', 'mdx') . '</a> ' . $delimiter . ' ';
         if (is_category()) {
             global $wp_query;
             $cat_obj = $wp_query->get_queried_object();
@@ -134,52 +136,52 @@ function bxm_breadcrumb() {
             $thisCat = get_category($thisCat);
             $parentCat = get_category($thisCat->parent);
             if ($thisCat->parent != 0) {
-                $cat_code = get_category_parents($parentCat, TRUE, ' '.$delimiter.' ');
+                $cat_code = get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' ');
                 echo str_replace('<a', '<a itemprop="breadcrumb"', $cat_code);
             }
-            echo $before.''.single_cat_title('', false).''.$after;
+            echo $before . '' . single_cat_title('', false) . '' . $after;
         } elseif (is_day()) {
-            echo '<a itemprop="breadcrumb" href="'.get_year_link(get_the_time('Y')).'">'.get_the_time('Y').'</a> '.$delimiter.' ';
-            echo '<a itemprop="breadcrumb"  href="'.get_month_link(get_the_time('Y'), get_the_time('m')).'">'.get_the_time('F').'</a> '.$delimiter.' ';
-            echo $before.get_the_time('d').$after;
+            echo '<a itemprop="breadcrumb" href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
+            echo '<a itemprop="breadcrumb"  href="' . get_month_link(get_the_time('Y'), get_the_time('m')) . '">' . get_the_time('F') . '</a> ' . $delimiter . ' ';
+            echo $before . get_the_time('d') . $after;
         } elseif (is_month()) {
-            echo '<a itemprop="breadcrumb" href="'.get_year_link(get_the_time('Y')).'">'.get_the_time('Y').'</a> '.$delimiter.' ';
-            echo $before.get_the_time('F').$after;
+            echo '<a itemprop="breadcrumb" href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
+            echo $before . get_the_time('F') . $after;
         } elseif (is_year()) {
-            echo $before.get_the_time('Y').$after;
+            echo $before . get_the_time('Y') . $after;
         } elseif (is_single() && !is_attachment()) {
             if (get_post_type() != 'post') {
                 $post_type = get_post_type_object(get_post_type());
                 $slug = $post_type->rewrite;
-                echo '<a itemprop="breadcrumb" href="'.$homeLink.'/'.$slug['slug'].'/">'.$post_type->labels->singular_name.'</a> '.$delimiter.' ';
+                echo '<a itemprop="breadcrumb" href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a> ' . $delimiter . ' ';
             } else {
                 $cat = get_the_category();
                 $cat = $cat[0];
-                $cat_code = get_category_parents($cat, TRUE, ' '.$delimiter.' ');
+                $cat_code = get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
                 echo str_replace('<a', '<a itemprop="breadcrumb"', $cat_code);
             }
-	        echo $before.get_the_title().$after;
+            echo $before . get_the_title() . $after;
         } elseif (!is_single() && !is_page() && get_post_type() != 'post') {
             $post_type = get_post_type_object(get_post_type());
-            echo $before.$post_type->labels->singular_name.$after;
+            echo $before . $post_type->labels->singular_name . $after;
         } elseif (is_attachment()) {
             $parent = get_post($post->post_parent);
             get_the_category($parent->ID);
-	        echo '<a itemprop="breadcrumb" href="'.get_permalink($parent).'">'.$parent->post_title.'</a> '.$delimiter.' ';
-            echo $before.get_the_title().$after;
+            echo '<a itemprop="breadcrumb" href="' . get_permalink($parent) . '">' . $parent->post_title . '</a> ' . $delimiter . ' ';
+            echo $before . get_the_title() . $after;
         } elseif (is_page() && !$post->post_parent) {
-            echo $before.get_the_title().$after;
+            echo $before . get_the_title() . $after;
         } elseif (is_page() && $post->post_parent) {
             $parent_id = $post->post_parent;
             $breadcrumbs = array();
             while ($parent_id) {
                 $page = get_post($parent_id);
-                $breadcrumbs[] = '<a itemprop="breadcrumb" href="'.get_permalink($page->ID).'">'.get_the_title($page->ID).'</a>';
+                $breadcrumbs[] = '<a itemprop="breadcrumb" href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
                 $parent_id = $page->post_parent;
             }
             $breadcrumbs = array_reverse($breadcrumbs);
-            foreach ($breadcrumbs as $crumb) echo $crumb.' '.$delimiter.' ';
-            echo $before.get_the_title().$after;
+            foreach ($breadcrumbs as $crumb) echo $crumb . ' ' . $delimiter . ' ';
+            echo $before . get_the_title() . $after;
         } elseif (is_search()) {
             echo $before;
             printf(__('搜索结果： %s', 'mdx'), get_search_query());
@@ -221,3 +223,29 @@ function sidebar_menu_classes($classes, $item, $args)
     return $classes;
 }
 add_filter('nav_menu_css_class', 'sidebar_menu_classes', 1, 3);
+function bxm_theme_style_color($colortext)
+{
+    $colors = array(
+        'red'         => '#f44336',
+        'pink'        => '#e91e63',
+        'purple'      => '#9c27b0',
+        'deep-purple' => '#673ab7',
+        'indigo'      => '#3f51b5',
+        'blue'        => '#2196f3',
+        'light-blue'  => '#03a9f4',
+        'cyan'        => '#00bcd4',
+        'teal'        => '#009688',
+        'green'       => '#4caf50',
+        'light-green' => '#8bc34a',
+        'lime'        => '#cddc39',
+        'yellow'      => '#ffeb3b',
+        'amber'       => '#ffc107',
+        'orange'      => '#ff9800',
+        'deep-orange' => '#ff5722',
+        'brown'       => '#795548',
+        'grey'        => '#9e9e9e',
+        'blue-grey'   => '#607d8b',
+        'white'       => '#9e9e9e',
+    );
+    return $colors[$colortext];
+}

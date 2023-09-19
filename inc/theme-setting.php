@@ -34,6 +34,12 @@ CSF::createSection(
         'description' => '全局设置',
         'fields' => array(
             array(
+                'id'=>'theme_keywords',
+                'title'=>__('网站关键词','bxm_lang'),
+                'type'=>'text',
+                'after' => __('<p>网站关键词，如果文章获取不到关键词会使用此处设置的关键词，请用英文逗号隔开</p>网站标题和介绍前往<a href="/wp-admin/options-general.php">WordPress设置-》常规</a>设置', 'bxm_lang'),
+            ),
+            array(
                 'id'         => "theme_color",
                 'title'    => __("全局主题色", 'bxm_lang'),
                 'subtitle' => __('选择主题色', 'bxm_lang'),
@@ -122,24 +128,7 @@ CSF::createSection(
                 'after' => __('开启后，移动 Chrome 访问时，其标题栏的背景颜色会随主题颜色变化。', 'bxm_lang'),
                 'default' => false,
             ),
-            array(
-                'id' => 'default_thumbnail',
-                'type' => 'switcher',
-                'title' => __('默认特色图片', 'bxm_lang'),
-                'after' => __('开启后，文章无特色图像时将显示默认图像，影响文章列表和文章页。若关闭则不显示。', 'bxm_lang'),
-                'default' => false,
-            ),
-            array(
-                'id' => 'default_thumbnail_url',
-                'type' => 'media',
-                'title' => __('默认特色图片地址', 'bxm_lang'),
-                'after' => __('上传默认特色图片', 'bxm_lang'),
-                'dependency' => array('default_thumbnail', '==', 'true'),
-                'default'   => array(
-                    'url'       => get_theme_file_uri('/images/dpic.jpg'),
-                    'thumbnail' => get_theme_file_uri('/images/dpic.jpg'),
-                ),
-            ),
+            
         ),
     ),
 );
@@ -221,8 +210,22 @@ CSF::createSection(
                 'title' => __('首页头部文本', 'bxm_lang'),
                 'type' => 'textarea',
                 'dependency' => array('home_header', '==', '1'),
-                'default' => '<h1>欢迎来到我的博客</h1><p>这里是一位的个人博客，欢迎您的访问。</p>',
+                'default' => '欢迎来到我的博客<p>这里是一位的个人博客，欢迎您的访问。</p>',
                 'after' => '支持HTML标签',
+            ),
+            array(
+                'title'=>__('开启网站公告'),
+                'id'=>'open_nitice',
+                'type'=>'switcher',
+                'default' => false,
+            ),
+            array(
+                'title'=>__('网站公告','bxm_lang'),
+                'id'=>'site_nitice_text',
+                'type'=>'textarea',
+                'default' => '<p>本站由 <a href="https://www.bxmao.net" target="_blank">白熊猫</a> 强力驱动</p>',
+                'after' => '支持HTML标签',
+                'dependency' => array('open_nitice', '==', true),
             ),
             array(
                 'title' => '幻灯片样式',
@@ -281,6 +284,7 @@ CSF::createSection(
                 'id' => 'home_recommend_cat',
                 'type' => 'text',
                 'default' => '',
+                'dependency' => array('home_recommend', '==', 'true'),
             ),
         ),
     ),
@@ -297,7 +301,7 @@ CSF::createSection(
             array(
                 'id'        => 'post_style',
                 'type'      => 'image_select',
-                'title'     => __('首页样式', 'bxm_lang'),
+                'title'     => __('文章样式', 'bxm_lang'),
                 'options'   => array(
                     'default' => get_theme_file_uri('/images/svg/defaule-post.svg'),
                     'concise'    => get_theme_file_uri('/images/svg/concise-post.svg'),
@@ -307,10 +311,18 @@ CSF::createSection(
                 'default'   => 'default',
             ),
             array(
+                'id' => 'default_thumbnail',
+                'type' => 'switcher',
+                'title' => __('默认特色图片', 'bxm_lang'),
+                'after' => __('开启后，文章无特色图像时将显示默认图像，影响文章列表和文章页。若关闭则不显示。', 'bxm_lang'),
+                'default' => false,
+            ),
+            array(
                 'title' => __('文章默认特色图片', 'bxm_lang'),
                 'id' => 'post_default_thumbnail',
                 'type' => 'media',
                 'after' => __('上传默认特色图片', 'bxm_lang'),
+                'dependency'=>array('default_thumbnail', '==', 'true'),
                 'default'   => array(
                     'url'       => get_theme_file_uri('/images/dpic.jpg'),
                     'thumbnail' => get_theme_file_uri('/images/dpic.jpg'),
@@ -377,6 +389,16 @@ CSF::createSection(
                 'default'   => 'concise',
             ),
             array(
+                'title'=>__('文章列表链接可点击区域', 'bxm_lang'),
+                'id'=>'post_list_clickable',
+                'type'=>'button_set',
+                'default'=>'1',
+                'options'=>array(
+                    '1'=>__('标题', 'bxm_lang'),
+                    '2'=>__('缩略图和标题', 'bxm_lang'),
+                ),
+            ),
+            array(
                 'title' => __('文章列表宽度', 'bxm_lang'),
                 'id' => 'post_list_width',
                 'type' => 'button_set',
@@ -423,9 +445,16 @@ CSF::createSection(
                     'comment' => true,
                 ),
             ),
+            array(
+                'title' => __('“阅读更多”文本自定义', 'bxm_lang'),
+                'id' => 'read_more_text',
+                'type' => 'text',
+                'default' => '阅读更多',
+            ),
         ),
     ),
 );
+// 标题栏
 CSF::createSection(
     $option,
     array(
@@ -456,6 +485,10 @@ CSF::createSection(
                 'title' => __('Logo地址', 'bxm_lang'),
                 'id' => 'header_logo',
                 'type' => 'media',
+                'default'   => array(
+                    'url'       => get_site_icon_url(),
+                    'thumbnail' => get_site_icon_url(),
+                ),
                 'dependency' => array('header_show', '==', '2'),
             ),
             array(
@@ -487,23 +520,37 @@ CSF::createSection(
                 'id' => 'drawer_top_img',
                 'type' => 'media',
                 'dependency' => array('drawer_show_info', '==', 'true'),
+                'default'   => array(
+                    'url'       => get_theme_file_uri('/images/dpic.jpg'),
+                    'thumbnail' => get_theme_file_uri('/images/dpic.jpg'),
+                ),
             ),
             array(
                 'title' => __('抽屉顶部头像', 'bxm_lang'),
                 'id' => 'drawer_top_avatar',
                 'type' => 'media',
+                'default'=>array(
+                    'url'=>get_avatar_url(get_current_user_id()),
+                    'thumbnail' => get_avatar_url(get_current_user_id()),
+                ),
+                'after'=>__('默认为管理员头像','bxm_lang'),
                 'dependency' => array('drawer_show_info', '==', 'true'),
             ),
             array(
                 'title' => __('菜单信息名称', 'bxm_lang'),
                 'id' => 'drawer_info_name',
                 'type' => 'text',
+                'default'=>get_bloginfo('name'),
+                'after'=>__('默认为网站名称','bxm_lang'),
+                'dependency' => array('drawer_show_info', '==', 'true'),
             ),
             array(
                 'title' => __('菜单详细信息', 'bxm_lang'),
                 'id' => 'drawer_info_detail',
                 'type' => 'textarea',
-                'after' => __('支持HTML标签', 'bxm_lang'),
+                'after' => __('默认为网站副标题，支持HTML标签', 'bxm_lang'),
+                'default'=>get_bloginfo('description'),
+                'dependency' => array('drawer_show_info', '==', 'true'),
             ),
         ),
     ),
@@ -534,12 +581,6 @@ CSF::createSection(
                 'type' => 'textarea',
                 'after' => __('支持HTML标签', 'bxm_lang'),
                 'default' => '<p>本站由 <a href="https://www.bxmao.net" target="_blank">白熊猫</a> 强力驱动</p>',
-            ),
-            array(
-                'title' => __('“阅读更多”文本自定义', 'bxm_lang'),
-                'id' => 'read_more_text',
-                'type' => 'text',
-                'default' => '阅读更多',
             ),
         ),
     ),
@@ -649,28 +690,7 @@ CSF::createSection($option, array(
     'id' => 'bxm-theme-functions',
     'icon'  => 'fa fa-cogs',
 ));
-// 列表页
-CSF::createSection(
-    $option,
-    array(
-        'title' => __('文章列表', 'bxm_lang'),
-        'parent'      => 'bxm-theme-functions',
-        'icon' => 'fa fa-list',
-        'description' => __('文章列表设置', 'bxm_lang'),
-        'fields'=>array(
-            array(
-                'title'=>__('文章列表链接可点击区域', 'bxm_lang'),
-                'id'=>'post_list_clickable',
-                'type'=>'button_set',
-                'default'=>'1',
-                'options'=>array(
-                    '1'=>__('标题', 'bxm_lang'),
-                    '2'=>__('缩略图和标题', 'bxm_lang'),
-                ),
-            ),
-        ),
-    ),
-);
+
 // 文章页面
 CSF::createSection(
     $option,

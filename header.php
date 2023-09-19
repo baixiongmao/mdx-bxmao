@@ -9,6 +9,7 @@ if (is_home()) {
     $title = $site_title . ' - ' . $site_description;
     $description = $site_description;
     $canonical = get_bloginfo('url');
+    $keywords=_PZ('theme_keywords');
 } else {
     // 分类
     if (is_category() || is_tag() || is_tax()) {
@@ -49,6 +50,9 @@ if (is_home()) {
     } else {
         $title = $site_title . ' - ' . $site_description;
     }
+}
+if(empty($keywords)){
+    $keywords=_PZ('theme_keywords');
 }
 $title = empty($title) ? $site_title : $title;
 $description = empty($description) ? $site_description : $description;
@@ -105,7 +109,7 @@ if (_PZ("post_list_width") === "2") {
     if (is_404()) {
         echo '<meta name="robots" content="noindex, nofollow">';
     } else {
-        echo '<meta name="keywords" content="关键词1, 关键词2, 关键词3">
+        echo '<meta name="keywords" content="'.$keywords.'">
     <meta name="description" content="' . $description . '">
     <link rel="canonical" href="' . $canonical . '">
     <meta property="og:title" content="' . $title . '">
@@ -114,13 +118,20 @@ if (_PZ("post_list_width") === "2") {
     <meta property="og:description" content="' . $description . '">
     <meta property="og:image" content="' . $imgurl . '">';
     }
+    if (_PZ('chrome_color')) {
+        $theme_color=bxm_theme_style_color(_PZ('theme_color'));
+    ?>
+        <meta name="theme-color" content="<?php echo $theme_color; ?>">
+        <meta name="mdx-main-color" content="<?php echo $theme_color; ?>">
+    <?php
+    }
     wp_head();
     ?>
 </head>
 
 
 <body class="<?php echo $body_class ?>">
-<?php 
-// 引入‘wp-content/themes/mdx-bxmao/inc/widget/them-style/night-style.php’
-get_template_part('inc/widget/them-style/night-style');
-?>
+    <?php
+    // 引入‘wp-content/themes/mdx-bxmao/inc/widget/them-style/night-style.php’
+    get_template_part('inc/widget/them-style/night-style');
+    ?>

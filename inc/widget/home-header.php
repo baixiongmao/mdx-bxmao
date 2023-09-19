@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 首页头部显示组件
+ * 头部组件
  */
 $header_auto_hide = _PZ('header_auto_hide');
 ?>
@@ -13,6 +13,7 @@ $header_auto_hide = _PZ('header_auto_hide');
             <button class="mdui-btn mdui-btn-icon" id="menu" mdui-drawer="{target:'#left-drawer',overlay:true <?php echo ',swipe:true'; ?>}">
                 <i class="mdui-icon material-icons">menu</i>
             </button>
+            <a href="<?php bloginfo('url'); ?>">
             <span class="mdui-typo-headline">
                 <?php
                 $header_show_type = _PZ('header_show');
@@ -36,7 +37,9 @@ $header_auto_hide = _PZ('header_auto_hide');
                             echo _PZ('header_custom_name');
                         }
                 }
-                ?></span>
+                ?>
+                </span>
+                </a>
             <div class="mdui-toolbar-spacer"></div>
             <button class="mdui-btn mdui-btn-icon seai"><i class="mdui-icon material-icons">&#xe8b6;</i></button>
         </div>

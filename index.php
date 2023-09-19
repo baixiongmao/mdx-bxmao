@@ -82,13 +82,9 @@ if ($home_style == 'mdx-first-tworows') {
                         <i class="mdui-icon material-icons seaicon">&#xe8b6;</i>' . __('搜索什么...', 'bxm_lang') . '
                     </div>';
 }
-$nitice_class = 'mdxNotice mdui-center';
+
 $home_style = _PZ('home_style');
-if ($home_style != "mdx-first-simple") {
-    $nitice_class .= ' mdx-notice-default';
-} else {
-    $nitice_class .= ' mdui-shadow-2';
-}
+
 
 ?>
 <div class="main">
@@ -98,13 +94,24 @@ if ($home_style != "mdx-first-simple") {
         </div>
     <?php } ?>
     <!-- 公告 STAR -->
-    <div class="<?php echo $nitice_class ?>"><i class="mdui-icon material-icons">&#xe7f7;</i>
-        <p class="mdui-typo">这是公告</p>
-    </div>
+    <?php if (_PZ('open_nitice')) {
+        $nitice_class = 'mdxNotice mdui-center';
+        if ($home_style != "mdx-first-simple") {
+            $nitice_class .= ' mdx-notice-default';
+        } else {
+            $nitice_class .= ' mdui-shadow-2';
+        }
+    ?>
+        <div class="<?php echo $nitice_class ?>"><i class="mdui-icon material-icons">&#xe7f7;</i>
+            <p class="mdui-typo"><?php echo _PZ('site_nitice_text');?></p>
+        </div>
+    <?php } ?>
     <!-- 公告 END -->
     <!-- 推荐文章 STAR -->
-    <?php get_template_part('inc/widget/recommend-post');
-      wp_reset_query(); ?>
+    <?php
+    if (_PZ('home_recommend')) {
+        get_template_part('inc/widget/recommend-post');
+    } ?>
     <!-- 推荐文章 END -->
     <!-- 首页文章标题 STAR -->
     <h3 class="mdx-all-posts">这是文章标题</h3>

@@ -29,8 +29,11 @@ if (!empty($imgurl)) { ?>
         <div class="mdui-card-media mdui-color-theme">
             <?php
             $clickable_area = _PZ('post_list_clickable');
-            if ($clickable_area == '2') : echo '<a href="' . the_permalink() . '">';
-            endif;
+            if ($clickable_area == '1'){
+                ?>
+                <a href="<?php the_permalink() ?>">
+                <?php
+            }
             // 文章列表图片高度
             
             if ($post_list_img_height == '1') { ?>
