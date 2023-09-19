@@ -1,7 +1,7 @@
 <?php flush(); ?>
 <?php get_header();
-$class='body-grey1 mdx-md2-font mdx-reduce-motion  ';
-$class=' mdx-wide-post-list ';
+$class = 'body-grey1 mdx-md2-font mdx-reduce-motion  ';
+$class = ' mdx-wide-post-list ';
 $img = _PZ('home_img_ur')['url'];
 ?>
 <div class="fullScreen sea-close"></div>
@@ -67,7 +67,7 @@ if ($home_header == '1') {
     </div>
 <?php
 } else { ?>
-<!-- 引入幻灯片组件 -->
+    <!-- 引入幻灯片组件 -->
 <?php
     get_template_part('inc/widget/home-swiper');
 }
@@ -82,7 +82,33 @@ if ($home_style == 'mdx-first-tworows') {
                         <i class="mdui-icon material-icons seaicon">&#xe8b6;</i>' . __('搜索什么...', 'bxm_lang') . '
                     </div>';
 }
-get_template_part('inc/widget/home-main');
-?>
+$nitice_class = 'mdxNotice mdui-center';
+$home_style = _PZ('home_style');
+if ($home_style != "mdx-first-simple") {
+    $nitice_class .= ' mdx-notice-default';
+} else {
+    $nitice_class .= ' mdui-shadow-2';
+}
 
-<?php get_footer(); ?>
+?>
+<div class="main">
+    <?php if (_PZ('home_style') == 'mdx-first-tworows') { ?>
+        <div class="mdx-tworow-search mdui-valign" role="button">
+            <i class="mdui-icon material-icons seaicon">&#xe8b6;</i> <?php _e('搜索什么...', 'mdx'); ?>
+        </div>
+    <?php } ?>
+    <!-- 公告 STAR -->
+    <div class="<?php echo $nitice_class ?>"><i class="mdui-icon material-icons">&#xe7f7;</i>
+        <p class="mdui-typo">这是公告</p>
+    </div>
+    <!-- 公告 END -->
+    <!-- 推荐文章 STAR -->
+    <?php get_template_part('inc/widget/recommend-post');
+      wp_reset_query(); ?>
+    <!-- 推荐文章 END -->
+    <!-- 首页文章标题 STAR -->
+    <h3 class="mdx-all-posts">这是文章标题</h3>
+    <!-- 首页文章标题 END-->
+    <?php get_template_part('inc/widget/posts-main') ?>
+
+    <?php get_footer(); ?>

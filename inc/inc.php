@@ -206,17 +206,14 @@ function bxm_breadcrumb() {
     }
 }
 // 添加菜单
-// function bxm_menu()
-// {
-//     register_nav_menus(array(
-//         'sidebar_menu' => __('侧边栏菜单', 'bxm_lang'),
-//     ));
-// }
-// add_action('after_setup_theme', 'bxm_menu');
-register_nav_menus(array(
-    'sidebar_menu' => __('侧边栏菜单', 'bxm_lang'),
-));
-function sidebar_menu_classes($classes, $item, $args)//求问这个$item的作用是什么？
+function bxm_menu()
+{
+    register_nav_menus(array(
+        'sidebar_menu' => __('侧边栏菜单', 'bxm_lang'),
+    ));
+}
+add_action('after_setup_theme', 'bxm_menu');
+function sidebar_menu_classes($classes, $item, $args)
 {
     if ($args->theme_location == 'sidebar_menu') {
         $classes[] = 'mdui-list-item mdui-ripple';

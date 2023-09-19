@@ -3,11 +3,7 @@
 /**
  * 推荐文章组件
  */
-$hot_post_class = 'mdx-hot-posts mdui-center';
-$home_style = _PZ('home_style');
-if ($home_style == 'mdx-first-simple') {
-    $hot_post_class .= ' mdui-shadow-2';
-}
+
 //获取最新的10篇文章
 $array = array(
     'post_type' => 'post',
@@ -17,11 +13,15 @@ $array = array(
     'order' => 'DESC',
     'ignore_sticky_posts' => true
 );
-$posts = new WP_Query($array);
+$posts = get_posts($array);
 // 判断文章是否为空
-if ($posts->have_posts()) {
+if ($posts) {
+    $hot_post_class = 'mdx-hot-posts mdui-center';
+    $home_style = _PZ('home_style');
+    if ($home_style == 'mdx-first-simple') {
+        $hot_post_class .= ' mdui-shadow-2';
+    }
 ?>
-
     <div class="<?php echo $hot_post_class ?>">
         <h3>推荐文章<i class="mdui-icon material-icons mdui-text-color-theme-accent">&#xe5c8;</i></h3>
         <div class="mdx-hp-h3-fill"></div>
@@ -31,13 +31,11 @@ if ($posts->have_posts()) {
             <div class="mdx-posts-may-related mdx-ul">
                 <!-- 推荐文章区域 STAR-->
                 <?php
-                while ($posts->have_posts()) {
-                    $posts->the_post();
+                foreach ($posts as $post) :  setup_postdata($post);
                     $thumbnail = get_the_post_thumbnail_url();
                     if (empty($thumbnail)) {
                         $thumbnail = _PZ('post_default_thumbnail')['url'];
-                    }
-                ?>
+                    } ?>
                     <a href="<?php echo get_permalink() ?>" rel="bookmark" title="<?php echo the_title() ?>">
                         <div class="mdx-li mdui-card mdui-color-theme mdui-hoverable">
                             <div class="lazyload mdx-hot-posts-lazyload" data-bg="<?php echo $thumbnail ?>">
@@ -48,10 +46,13 @@ if ($posts->have_posts()) {
                         </div>
                     </a>
                 <?php
-                }
+                endforeach;
                 ?>
                 <!-- 推荐文章区域 END-->
             </div>
         </div>
     </div>
-<?php } ?>
+<?php
+    wp_reset_postdata();
+}
+?>
