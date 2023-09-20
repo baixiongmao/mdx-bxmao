@@ -5,6 +5,7 @@ $site_title = get_bloginfo('name', 'display');
 $site_description = get_bloginfo('description', 'display');
 $keywords = '';
 $imgurl = '';
+$canonical='';
 if (is_home()) {
     $title = $site_title . ' - ' . $site_description;
     $description = $site_description;

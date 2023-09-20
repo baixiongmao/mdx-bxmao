@@ -108,11 +108,22 @@ if (_PZ('search_live')) { ?>
     <?php } ?>
 </script>
 <script>
-    var enhanced_ajax=false;
+    var enhanced_ajax = <?php echo json_encode((bool)_PZ('post_list_ajax')) ?>;
 </script>
-<?php if (is_home()&&_PZ('home_header')=='2') { ?>
+<?php
+if (!is_home()&&!is_single()) {
+    if (is_search()) {
+        $acPageTitle = '搜索结果:' . the_search_query();
+    } elseif (is_category() || is_archive()) {
+        $acPageTitle = '文章归档' . get_the_archive_title();
+    } elseif (is_author()) {
+        $acPageTitle = '作者归档' . get_the_author();
+    } ?>
     <script>
-        var enhanced_ajax = <?php echo json_encode((bool)_PZ('post_list_ajax'))?>;
-        var slideInterval = <?php echo _PZ('home_header_slider_time') ?>;
+        var acPageTitle = "<?php echo $acPageTitle; ?>";
     </script>
-<?php } ?>
+<?php }
+?>
+</body>
+
+</html>

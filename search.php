@@ -40,3 +40,8 @@ get_template_part('inc/widget/search-box'); ?>
       </main>
     <?php endif; ?>
     <?php get_footer(); ?>
+    body > div.main > div.mdui-hoverable.nextpage2
+    /html/body/div[5]/div
+    /html/body/div[5]/div
+    document.querySelector("body > div.main-in-other > div")
+    document.querySelector("body > div.main-in-other > div")

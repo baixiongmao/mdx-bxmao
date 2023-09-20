@@ -44,33 +44,30 @@ $theme_black = _PZ('theme_black');
     ?>
         <div class="mdx-side-title">
             <a href="<?php bloginfo('url'); ?>">
-                <span>
-                    <?php
-                    $header_show_type = _PZ('header_show');
-                    switch ($header_show_type) {
-                        case '1':
-                            echo bloginfo('name');
-                            break;
-                        case '2':
-                            // 显示logo
-                            if (_PZ('header_logo')['url'] == '') {
-                                echo '请设置logo';
-                            } else {
-                                echo '<img class="mdx-logo" src="' . _PZ('header_logo') . '">';
-                            }
-                            break;
-                        default:
-                            $header_custom_name = _PZ('header_custom_name');
-                            if ($header_custom_name == '') {
-                                echo '请设置站点名称';
-                            } else {
-                                echo _PZ('header_custom_name');
-                            }
-                    }
-                    ?></span></a>
-            <?php
-            if ($theme_black == '3') {
-            ?>
+                <span><?php
+                        $header_show_type = _PZ('header_show');
+                        switch ($header_show_type) {
+                            case '1':
+                                echo bloginfo('name');
+                                break;
+                            case '2':
+                                // 显示logo
+                                if (_PZ('header_logo')['url'] == '') {
+                                    echo '请设置logo';
+                                } else {
+                                    echo '<img class="mdx-logo" src="' . _PZ('header_logo') . '">';
+                                }
+                                break;
+                            default:
+                                $header_custom_name = _PZ('header_custom_name');
+                                if ($header_custom_name == '') {
+                                    echo '请设置站点名称';
+                                } else {
+                                    echo _PZ('header_custom_name');
+                                }
+                        }
+                        ?></span></a>
+            <?php if ($theme_black == '3') {?>
                 <button class="mdui-btn mdui-btn-icon mdui-ripple nightVision mdui-text-color-white mdui-valign mdui-text-center" mdui-tooltip="{content: '<?php echo addslashes(__('切换日间/夜间模式', 'mdx')); ?>'}" id="tgns" mdui-drawer-close="{target: '#left-drawer'}"><i class="mdui-icon material-icons">&#xe3a9;</i></button>
             <?php } ?>
         </div>

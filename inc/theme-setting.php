@@ -451,6 +451,12 @@ CSF::createSection(
                 'type' => 'text',
                 'default' => '阅读更多',
             ),
+            array(
+                'title' => __('增强的文章列表加载方式', 'bxm_lang'),
+                'id' => 'post_list_ajax',
+                'type' => 'switcher',
+                'default' => false,
+            ),
         ),
     ),
 );
@@ -666,12 +672,6 @@ CSF::createSection(
             array(
                 'title' => __('点击标题栏返回顶部', 'bxm_lang'),
                 'id' => 'header_back_top',
-                'type' => 'switcher',
-                'default' => false,
-            ),
-            array(
-                'title' => __('增强的文章列表加载方式', 'bxm_lang'),
-                'id' => 'post_list_ajax',
                 'type' => 'switcher',
                 'default' => false,
             ),

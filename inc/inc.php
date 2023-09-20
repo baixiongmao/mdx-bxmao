@@ -49,10 +49,15 @@ function mdx_js()
     wp_register_script('mdx_mdui_js', $files_root . '/mdui/js/mdui.min.js', false, '', true);
     wp_register_script('mdx_common', $files_root . '/js/common.js', false, '', true);
     wp_register_script('mdx_sl_js', $files_root . '/js/lazyload.js', false, '', true);
-    wp_register_script('theme_js', $files_root . '/js/js.js?', false, '', true);
+    if(is_home()){
+        wp_register_script('theme_js', $files_root . '/js/js.js', false, '', true);
+    wp_enqueue_script('theme_js');
+    }elseif(is_category() || is_archive() || is_search()){
+        wp_register_script('ac_js', $files_root . '/js/ac.js', false, '', true);
+        wp_enqueue_script('ac_js');
+    }
     wp_enqueue_script('mdx_mdui_js');
     wp_enqueue_script('mdx_common');
-    wp_enqueue_script('theme_js');
     // 实时搜索
     // if (mdx_get_option("mdx_real_search") == "true") {
     //     wp_register_script('mdx_rs_js', $files_root . '/js/search.js', false, '', true);

@@ -103,7 +103,7 @@ $home_style = _PZ('home_style');
         }
     ?>
         <div class="<?php echo $nitice_class ?>"><i class="mdui-icon material-icons">&#xe7f7;</i>
-            <p class="mdui-typo"><?php echo _PZ('site_nitice_text');?></p>
+            <p class="mdui-typo"><?php echo _PZ('site_nitice_text'); ?></p>
         </div>
     <?php } ?>
     <!-- 公告 END -->
@@ -116,6 +116,7 @@ $home_style = _PZ('home_style');
     <!-- 首页文章标题 STAR -->
     <h3 class="mdx-all-posts">这是文章标题</h3>
     <!-- 首页文章标题 END-->
-    <?php get_template_part('inc/widget/posts-main') ?>
-
-    <?php get_footer(); ?>
+    <?php
+    get_template_part('inc/widget/posts-main');
+    get_footer();
+    ?>
